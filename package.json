@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@picocss/pico": "^1.5.7",
+    "ethers": "^6.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -17,5 +19,17 @@
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
     "vite": "^4.0.0"
-  }
+  },
+  "description": "��#\u0000 \u0000M\u0000i\u0000n\u0000i\u0000 \u0000E\u0000t\u0000h\u0000e\u0000r\u0000s\u0000c\u0000a\u0000n\u0000\r\u0000 \u0000 \u0000",
+  "main": "vite.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfaqi/mini_Etherscan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfaqi/mini_Etherscan/issues"
+  },
+  "homepage": "https://github.com/alfaqi/mini_Etherscan#readme"
 }

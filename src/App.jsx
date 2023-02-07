@@ -1,20 +1,19 @@
 import ReactLoading from 'react-loading';
-import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import './App.css'
 import Blocks from './compnents/Blocks';
 import Logo from './svg/ethereum.svg'
 import INFURA_ENDPOINT_KEY from './.infura'
+import { ethers } from 'ethers';
 
 function App() {
   const [lastBlock, setLastBlock] = useState(0);
   const [gasPrice, setGasPrice] = useState(0);
   const [blocks, setBlocks] = useState([]);
-
+  
   // Load Web3  
   const endpoint = `https://mainnet.infura.io/v3/${INFURA_ENDPOINT_KEY}`;
   const provider = new ethers.providers.JsonRpcProvider(endpoint)
-
   const fetchingData = async () => {
     // Get last block number
     const lastBlock = await provider.getBlock('latest');

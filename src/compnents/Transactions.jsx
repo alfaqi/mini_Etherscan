@@ -1,11 +1,11 @@
-export default ({ blocks, latestBlocksBalance, tx }) => {
+export default ({ transactions, latestBlocksBalance }) => {
 
     return (
         <div>
             <table role="grid">
                 <thead>
                     <td colSpan='5'>
-                        <b>Latest Blocks</b>
+                        <b>Latest Transactions</b>
                     </td>
                     <hr />
                     <tr>
@@ -17,24 +17,18 @@ export default ({ blocks, latestBlocksBalance, tx }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {blocks.map((block, key) => {
+                    {transactions.map((block, key) => {
                         return (
                             <tr key={key}>
                                 <th scope='row'>
                                     <a href={`https://etherscan.io/block/${block.number}`} target='_blank'>
                                         {block.number}
-                                    </a>
-                                </th>
+                                    </a></th>
                                 <td> {block.hash.substring(0, 20)}...</td>
                                 <td>
                                     <a href={`https://etherscan.io/address/${block.miner}`} target='_blank'>
                                         {block.miner.substring(0, 20)}...
                                     </a>
-                                    <br />
-                                    <a href={`https://etherscan.io/txs?block=${block.number}`} target='_blank' data-tooltip='Transactions in this Block'>
-                                        {tx[key] + ' txns'}
-                                    </a>
-
                                 </td>
                                 <td>{latestBlocksBalance[key].substring(0, 7) + ' ETH'}</td>
                                 <td>
@@ -50,9 +44,8 @@ export default ({ blocks, latestBlocksBalance, tx }) => {
                     <tr>
                         <td colSpan='5'>
                             <center>
-
-                                <a href='https://etherscan.io/blocks' target='_blank' >
-                                    View all blocks
+                                <a href='https://etherscan.io/txs' target='_blank'>
+                                    View all transactions
                                 </a>
                             </center>
                         </td>

@@ -1,20 +1,29 @@
 import Nav from './compnents/Nav';
 import Home from './Home'
-import './App'
+// import './App'
+import Search from './compnents/Search';
 
 function App() {
+  let ethNet, net;
+  switch (net) {
+    case 'mainnet':
+      ethNet = 'mainnet'
+      break;
+    case 'goerli':
+      ethNet = 'goerli'
+      break;
+    case 'sepolia':
+      ethNet = 'sepolia'
+      break;
+
+    default:
+      ethNet = 'mainnet'
+      break;
+  }
   return (
     <div>
-      <nav >
-        <ul>
-          <li><strong>Brand</strong></li>
-        </ul>
-        <ul>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#" role="button">Button</a></li>
-        </ul>
-      </nav>
+      <Nav />
+      <Search />
       <Home />
     </div>
   );

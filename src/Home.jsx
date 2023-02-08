@@ -7,15 +7,17 @@ import INFURA_ENDPOINT_KEY from './.infura'
 import { ethers } from 'ethers';
 import Transactions from './compnents/Transactions';
 
-function App() {
+export default ({ ethNet = 'mainnet' }) => {
   const [lastBlock, setLastBlock] = useState(0);
   const [gasPrice, setGasPrice] = useState(0);
   const [blocks, setBlocks] = useState([]);
   const [blocksBalance, setBlocksBalance] = useState([]);
   const [tx, setTx] = useState([]);
-
+  
   // Load Web3  
-  const endpoint = `https://mainnet.infura.io/v3/${INFURA_ENDPOINT_KEY}`;
+  // mainnet, goerli, sepolia
+   
+  const endpoint = `https://${ethNet}.infura.io/v3/${INFURA_ENDPOINT_KEY}`;
   const provider = new ethers.providers.JsonRpcProvider(endpoint)
 
   const fetchingData = async () => {
@@ -42,7 +44,6 @@ function App() {
     setBlocks(arr)
     setBlocksBalance(arrBalan);
     setTx(arrTx)
-
   }
 
   useEffect(() => {
@@ -51,11 +52,9 @@ function App() {
 
   return (
     <div className='App'>
-      <img src={Logo} alt='logo' style={{ 'width': '50px' }} />
-
+<strong> Network </strong>
+      <strong>Last block: {lastBlock.number} </strong>
       <br />
-      <strong>Last block: {lastBlock.number}, </strong>
-      <b> </b>
       <strong>Gas price: {gasPrice.toString()}</strong>
       <br />
       {blocks.length === 0
@@ -65,14 +64,12 @@ function App() {
           <ReactLoading type="spinningBubbles" color="#0000FF" height={100} width={80} />
         </center>
         : <>
-          <Blocks blocks={blocks} latestBlocksBalance={blocksBalance} tx={tx}/>
+          <Blocks blocks={blocks} latestBlocksBalance={blocksBalance} tx={tx} />
           <Transactions transactions={blocks} latestBlocksBalance={blocksBalance} />
         </>
-
       }
-
     </div>
   );
 }
 
-export default App;
+

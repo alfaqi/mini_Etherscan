@@ -1,30 +1,15 @@
 import Nav from './compnents/Nav';
 import Home from './Home'
-// import './App'
 import Search from './compnents/Search';
+import { useState } from 'react';
 
 function App() {
-  let ethNet, net;
-  switch (net) {
-    case 'mainnet':
-      ethNet = 'mainnet'
-      break;
-    case 'goerli':
-      ethNet = 'goerli'
-      break;
-    case 'sepolia':
-      ethNet = 'sepolia'
-      break;
-
-    default:
-      ethNet = 'mainnet'
-      break;
-  }
+  const [ethNet, setEthNet] = useState('mainnet')
   return (
     <div>
-      <Nav />
+      <Nav SelectedItem={(a) => { setEthNet(a) }} />
       <Search />
-      <Home />
+      <Home ethNet={ethNet} />
     </div>
   );
 }

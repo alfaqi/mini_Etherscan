@@ -13,14 +13,22 @@ export default ({ ethNet = 'mainnet' }) => {
   const [blocks, setBlocks] = useState([]);
   const [blocksBalance, setBlocksBalance] = useState([]);
   const [tx, setTx] = useState([]);
-  
+  const [networt, setNetwork] = useState(null)
+
   // Load Web3  
   // mainnet, goerli, sepolia
-   
   const endpoint = `https://${ethNet}.infura.io/v3/${INFURA_ENDPOINT_KEY}`;
   const provider = new ethers.providers.JsonRpcProvider(endpoint)
-
+  let txns
   const fetchingData = async () => {
+    let network = await provider.getNetwork()
+    if (network.chainId == 1)
+      setNetwork('Ethereum Mainnet')
+    else if (network.chainId == 5)
+      setNetwork('Goerli Testnet')
+    else if (network.chainId == 11155111)
+      setNetwork('Sepolia Testnet')
+
     // Get last block number
     const lastBlock = await provider.getBlock('latest');
     setLastBlock(lastBlock)
@@ -29,17 +37,25 @@ export default ({ ethNet = 'mainnet' }) => {
     const gasPrice = await provider.getGasPrice();
     setGasPrice(gasPrice.toNumber())
 
-    // Get last 10 blocks 
+    //Get transactions
+    txns = await provider.getBlockWithTransactions(lastBlock.number)
+    console.log('aaa ', txns.number);
+
+    // Get last 5 blocks and number of transactions
     let arr = [];
     let arrBalan = [];
     let arrTx = [];
-    for (let i = 0; i < 5; i++) {
+
+    let lengthOfBlocks = 5
+
+    for (let i = 0; i < lengthOfBlocks; i++) {
       const block = await provider.getBlock(lastBlock.number - i);
       const txes = await provider.getBlockWithTransactions(lastBlock.number - i)
-      // console.log(a.transactions.length , lastBlock.number-i);
+
       arr.push(block);
       arrBalan.push(ethers.utils.formatEther(await provider.getBalance(block.miner), 'ether'))
       arrTx.push(txes.transactions.length)
+      console.log('aaa ', lastBlock.number);
     }
     setBlocks(arr)
     setBlocksBalance(arrBalan);
@@ -47,16 +63,23 @@ export default ({ ethNet = 'mainnet' }) => {
   }
 
   useEffect(() => {
+    setBlocks([])
+    setGasPrice(0)
+    setLastBlock(0)
+    setBlocksBalance([])
+    setTx([])
+    setNetwork('')
     fetchingData();
-  }, [])
+  }, [ethNet])
 
   return (
     <div className='App'>
-<strong> Network </strong>
-      <strong>Last block: {lastBlock.number} </strong>
-      <br />
-      <strong>Gas price: {gasPrice.toString()}</strong>
-      <br />
+      <article>
+        Network: <strong>{networt}</strong>,
+        Last block: <strong>{lastBlock.number} </strong>
+        <br />
+        Gas price: <strong>{gasPrice.toString()}</strong>
+      </article>
       {blocks.length === 0
         ?
         <center>
@@ -64,8 +87,12 @@ export default ({ ethNet = 'mainnet' }) => {
           <ReactLoading type="spinningBubbles" color="#0000FF" height={100} width={80} />
         </center>
         : <>
-          <Blocks blocks={blocks} latestBlocksBalance={blocksBalance} tx={tx} />
-          <Transactions transactions={blocks} latestBlocksBalance={blocksBalance} />
+          <article>
+            <Blocks blocks={blocks} latestBlocksBalance={blocksBalance} tx={tx} ethNet={ethNet} />
+          </article>
+          {/* <article>
+            <Transactions transactions={blocks} latestBlocksBalance={blocksBalance} />
+          </article> */}
         </>
       }
     </div>

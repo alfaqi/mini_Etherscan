@@ -2,8 +2,10 @@ import '../App'
 export default () => {
     return (
         <>
-            <input type="search" id="search" name="search" placeholder="Search" style={{'width':'100%'}}/>
+            <input type="search" placeholder="Search" style={{ 'width': '100%' }} />
+            {/* <article>
+                <button type='button'>Search</button>
+            </article> */}
         </>
-
     )
 };

@@ -1,5 +1,16 @@
-export default ({ blocks, latestBlocksBalance, tx }) => {
+import { useEffect, useState } from "react"
 
+export default ({ blocks, latestBlocksBalance, tx, ethNet }) => {
+    const [network, setNetwork] = useState('')
+    const networkSelected = () => {
+        if (ethNet == 'goerli')
+            setNetwork('goerli.')
+        else if (ethNet == 'sepolia')
+            setNetwork('sepolia.')
+    }
+    useEffect(() => {
+        networkSelected()
+    }, [])
     return (
         <div>
             <table role="grid">
@@ -21,20 +32,19 @@ export default ({ blocks, latestBlocksBalance, tx }) => {
                         return (
                             <tr key={key}>
                                 <th scope='row'>
-                                    <a href={`https://etherscan.io/block/${block.number}`} target='_blank'>
+                                    <a href={`https://${network}etherscan.io/block/${block.number}`} target='_blank'>
                                         {block.number}
                                     </a>
                                 </th>
                                 <td> {block.hash.substring(0, 20)}...</td>
                                 <td>
-                                    <a href={`https://etherscan.io/address/${block.miner}`} target='_blank'>
+                                    <a href={`https://${network}etherscan.io/address/${block.miner}`} target='_blank'>
                                         {block.miner.substring(0, 20)}...
                                     </a>
                                     <br />
-                                    <a href={`https://etherscan.io/txs?block=${block.number}`} target='_blank' data-tooltip='Transactions in this Block'>
+                                    <a href={`https://${network}etherscan.io/txs?block=${block.number}`} target='_blank' data-tooltip='Transactions in this Block'>
                                         {tx[key] + ' txns'}
                                     </a>
-
                                 </td>
                                 <td>{latestBlocksBalance[key].substring(0, 7) + ' ETH'}</td>
                                 <td>
@@ -50,8 +60,7 @@ export default ({ blocks, latestBlocksBalance, tx }) => {
                     <tr>
                         <td colSpan='5'>
                             <center>
-
-                                <a href='https://etherscan.io/blocks' target='_blank' >
+                                <a href={`https://${network}etherscan.io/blocks`} target='_blank' >
                                     View all blocks
                                 </a>
                             </center>

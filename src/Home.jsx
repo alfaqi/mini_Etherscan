@@ -39,7 +39,7 @@ export default ({ ethNet = 'mainnet' }) => {
 
     //Get transactions
     txns = await provider.getBlockWithTransactions(lastBlock.number)
-    console.log('aaa ', txns.number);
+    // console.log('aaa ', txns.number);
 
     // Get last 5 blocks and number of transactions
     let arr = [];
@@ -55,7 +55,7 @@ export default ({ ethNet = 'mainnet' }) => {
       arr.push(block);
       arrBalan.push(ethers.utils.formatEther(await provider.getBalance(block.miner), 'ether'))
       arrTx.push(txes.transactions.length)
-      console.log('aaa ', lastBlock.number);
+      // console.log('aaa ', lastBlock.number);
     }
     setBlocks(arr)
     setBlocksBalance(arrBalan);

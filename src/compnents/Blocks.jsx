@@ -18,7 +18,7 @@ export default ({ blocks, latestBlocksBalance, tx, ethNet }) => {
                     <td colSpan='5'>
                         <b>Latest Blocks</b>
                     </td>
-                    <hr />
+                    {/* <hr /> */}
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Hash</th>

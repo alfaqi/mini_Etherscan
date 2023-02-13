@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
-import Home from '../Home';
 import logo from '../svg/ethereum.svg'
-import Search from './Search';
-export default ({ SelectedItem }) => {
+export default ({ SelectedItem, Srch }) => {
     const [ethNet, setEthNet] = useState('mainnet');
+    const [srch, setSrch] = useState(false)
     const [url, setUrl] = useState('')
     const handleChange = (e) => {
         setEthNet(e.target.value)
+    }
+    const changeSearchState = () => {
+        setSrch(!srch)
+        Srch(srch)
     }
     const networkSelected = () => {
         if (ethNet == 'mainnet')
@@ -16,6 +19,7 @@ export default ({ SelectedItem }) => {
         else if (ethNet == 'sepolia')
             setUrl('https://sepolia.etherscan.io/')
     }
+
     useEffect(() => {
         networkSelected()
     }, [ethNet])
@@ -29,6 +33,8 @@ export default ({ SelectedItem }) => {
                 </ul>
                 <ul role='listbox'>
                     <li><a href={url} target='_blank'>Home</a></li>
+                    <li><a onClick={changeSearchState}>
+                        <button style={{'background-color': '#588ae8' }}>Search</button></a></li>
                     <li>
                         <select id='network' onClick={handleChange} onChange={SelectedItem(ethNet)}>
                             <option value="mainnet" >Mainnet</option>
@@ -41,6 +47,7 @@ export default ({ SelectedItem }) => {
         </div>
     )
 }
+
 
 
 

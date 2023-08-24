@@ -2,7 +2,7 @@ import Nav from './compnents/Nav';
 import Home from './Home'
 import Search from './compnents/Search';
 import { useEffect, useState } from 'react';
-import Srch from './compnents/srch';
+//import Srch from './compnents/srch';
 
 function App() {
   const [ethNet, setEthNet] = useState('mainnet')

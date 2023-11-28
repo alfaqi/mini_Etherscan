@@ -15,8 +15,8 @@ npm install
 
 <list>
 <ul>Vite + React</ul>
-<ul>Ethers.js</ul>
 <ul>PicoCSS</ul>
+<ul>Ethers.js</ul>
 
 # Run the Site
 

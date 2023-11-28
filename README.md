@@ -1,6 +1,6 @@
 ﻿# Mini Etherscan
 
-Live Dome [Mini Etherscan](https://mini-etherscan.vercel.app/)
+Live Demo [Mini Etherscan](https://mini-etherscan.vercel.app/)
 
 Connecting to Ethereum mainnet and fetch data <br/>
 Using Ethers.js for connection and metamask wallet

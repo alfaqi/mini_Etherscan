@@ -11,7 +11,7 @@ Using Ethers.js for connection and metamask wallet
 npm install
 ```
 
-# Labiraries
+# Libraries
 
 <list>
 <ul>Vite + React</ul>
